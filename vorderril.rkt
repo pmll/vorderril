@@ -61,7 +61,8 @@
     (let ((operand1 (car operands))
           (operand2 (cadr operands)))
       (if (or (and (eq? op -) (= operand1 operand2))
-              (and (eq? op /) (or (zero? operand2) (not (zero? (remainder operand1 operand2))))))
+              (and (eq? op /) (or (< operand2 2) (not (zero? (remainder operand1 operand2)))))
+              (and (eq? op *) (= operand2 1)))
           #f 
           (solve (cons (op operand1 operand2)
                        remaining)
